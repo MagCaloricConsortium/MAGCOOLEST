@@ -1,0 +1,245 @@
+/* MAGCOOLEST — single stylesheet
+   Palette: cool steel blue base, copper used only in the thermal-gradient rule. */
+
+:root {
+  --ink:      #10222F;
+  --ink-soft: #46606F;
+  --paper:    #FBFCFC;
+  --panel:    #F0F3F5;
+  --line:     #D5DDE2;
+  --cold:     #1B4965;
+  --warm:     #A8551F;
+  --measure:  34rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* The thermal gradient: cold to warm, the one piece of colour on the page. */
+.gradient-rule {
+  height: 4px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(90deg, #1B4965 0%, #2E7D96 30%, #7FA98A 55%, #C98A3C 80%, #A8551F 100%);
+}
+
+/* ---------- Layout ---------- */
+
+.wrap {
+  width: min(66rem, 100% - 3rem);
+  margin-inline: auto;
+}
+
+main { padding-block: 3.5rem 4.5rem; }
+
+section + section { margin-top: 3.25rem; }
+
+/* ---------- Header ---------- */
+
+header.site { background: var(--paper); }
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.6rem 1.1rem;
+}
+
+.wordmark {
+  font-family: "Spectral", Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cold);
+  text-decoration: none;
+}
+
+.wordmark span {
+  display: block;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+}
+
+nav.main ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav.main a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.93rem;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+nav.main a:hover,
+nav.main a:focus-visible { color: var(--cold); border-bottom-color: var(--cold); }
+
+nav.main a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--warm); }
+
+.lang { font-size: 0.88rem; }
+.lang a { color: var(--ink-soft); }
+
+/* ---------- Type ---------- */
+
+h1, h2, h3 {
+  font-family: "Spectral", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--cold);
+  margin: 0 0 0.6rem;
+}
+
+h1 { font-size: clamp(1.9rem, 1.3rem + 2.4vw, 2.9rem); }
+h2 { font-size: 1.5rem; margin-top: 0; }
+h3 { font-size: 1.12rem; color: var(--ink); margin-bottom: 0.3rem; }
+
+p, li { max-width: var(--measure); }
+
+a { color: var(--cold); }
+a:hover { color: var(--warm); }
+
+.lede {
+  font-size: 1.16rem;
+  line-height: 1.58;
+  color: var(--ink-soft);
+  max-width: 38rem;
+}
+
+/* ---------- Hero ---------- */
+
+.hero { padding-block: 1rem 0.5rem; }
+
+.hero h1 { max-width: 20ch; }
+
+.hero .span-figure {
+  margin-top: 2.2rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.hero .span-figure div { max-width: 15rem; }
+
+.hero .span-figure strong {
+  display: block;
+  font-family: "Spectral", Georgia, serif;
+  font-size: 1.45rem;
+  color: var(--cold);
+}
+
+.hero .span-figure span { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* ---------- Blocks ---------- */
+
+.panel {
+  background: var(--panel);
+  border-left: 3px solid var(--cold);
+  padding: 1.3rem 1.5rem;
+}
+
+.panel p:last-child, .panel ul:last-child { margin-bottom: 0; }
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.6rem 2.4rem;
+}
+
+.cols p, .cols li { max-width: none; }
+
+.stack > * + * { margin-top: 1.9rem; }
+
+dl.people { margin: 0; }
+dl.people dt { font-weight: 600; margin-top: 0.85rem; }
+dl.people dd { margin: 0; color: var(--ink-soft); font-size: 0.95rem; max-width: var(--measure); }
+
+ul.plain { list-style: none; padding-left: 0; }
+ul.plain li { padding-left: 1.1rem; text-indent: -1.1rem; }
+ul.plain li::before { content: "— "; color: var(--warm); }
+
+/* News entries */
+
+article.entry { padding-block: 1.6rem; border-top: 1px solid var(--line); }
+article.entry:first-of-type { border-top: 0; padding-top: 0.4rem; }
+article.entry time { font-size: 0.85rem; color: var(--ink-soft); }
+article.entry h3 { margin-top: 0.2rem; }
+
+/* Work package list */
+
+.wp { border-top: 1px solid var(--line); padding-block: 1.1rem; }
+.wp h3 { color: var(--cold); }
+.wp .lead-inst { font-size: 0.85rem; color: var(--ink-soft); }
+
+/* Empty-state note */
+
+.note {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
+  padding: 1rem 1.2rem;
+  max-width: var(--measure);
+}
+
+/* ---------- Footer ---------- */
+
+footer.site {
+  margin-top: 4rem;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+
+footer.site .wrap { padding-block: 2.2rem 2.6rem; }
+
+footer.site p, footer.site li {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  max-width: 44rem;
+}
+
+.funding { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; margin-bottom: 1rem; }
+.funding img { height: 46px; width: auto; }
+
+.refs { font-variant-numeric: tabular-nums; }
+
+/* ---------- Accessibility & motion ---------- */
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--warm);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+
+@media (max-width: 40rem) {
+  body { font-size: 16px; }
+  .masthead { padding-block: 1.2rem 0.8rem; }
+  nav.main ul { gap: 0.85rem; }
+}
